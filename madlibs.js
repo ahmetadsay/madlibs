@@ -26,10 +26,26 @@
  * There are multiple ways to do this, but you may want to use regular expressions.
  * Please go through this lesson: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/
  */
+
+
+// function parseStory(rawStory) {
+  
+//     const h2 = document.getElementsByClassName("madLibsEdit")[0];
+//     let html = ``;
+//     return h2.insertAdjacentHTML("beforeend", rawStory)
+//    // This line is currently wrong :)
+// }
+
+// parseStory()
+
 function parseStory(rawStory) {
-  // Your code here.
-  return {}; // This line is currently wrong :)
+  const h2 = document.getElementsByClassName("madLibsEdit")[0];
+  let processedHTML = "";
+  processedHTML += "<p>" + rawStory + "</p>";
+  h2.insertAdjacentHTML("beforeend", processedHTML);
+  return processedHTML;
 }
+
 
 /**
  * All your other JavaScript code goes here, inside the function. Don't worry about
@@ -47,3 +63,4 @@ getRawStory()
   .then((processedStory) => {
     console.log(processedStory);
   });
+
