@@ -27,25 +27,43 @@
  * Please go through this lesson: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/
  */
 
-
-// function parseStory(rawStory) {
-  
-//     const h2 = document.getElementsByClassName("madLibsEdit")[0];
-//     let html = ``;
-//     return h2.insertAdjacentHTML("beforeend", rawStory)
-//    // This line is currently wrong :)
-// }
-
-// parseStory()
-
 function parseStory(rawStory) {
-  const h2 = document.getElementsByClassName("madLibsEdit")[0];
-  let processedHTML = "";
-  processedHTML += "<p>" + rawStory + "</p>";
+  const h2 = document.querySelector(".madLibsEdit");
+  let processedHTML = "<p>";
+  let i = 0;
+  console.log(rawStory)
+  while (i < rawStory.length) {
+    if (rawStory[i] === "[") {
+      
+      let inputType;
+      if (rawStory[i+1] === "n") {
+        inputType = "noun";
+      } else if (rawStory[i+1] === "v") {
+        inputType = "verb";
+      } else {
+        inputType = "adjective";
+      }
+
+      console.log(processedHTML)
+      processedHTML = processedHTML.substring(0, processedHTML.lastIndexOf(" "));
+      console.log(processedHTML)
+
+      processedHTML += `<span></span> <input type="text" placeholder="${inputType}">`;
+      console.log(processedHTML)
+
+      i = rawStory.indexOf("]", i) + 2;
+      console.log(i)
+    } else {
+      
+      processedHTML += rawStory[i];
+   
+      i++;
+    }
+  }
+  processedHTML += "</p>";
   h2.insertAdjacentHTML("beforeend", processedHTML);
   return processedHTML;
 }
-
 
 /**
  * All your other JavaScript code goes here, inside the function. Don't worry about
