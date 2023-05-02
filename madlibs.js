@@ -29,41 +29,19 @@
 
 function parseStory(rawStory) {
   const h2 = document.querySelector(".madLibsEdit");
-  let processedHTML = "<p>";
-  let i = 0;
-  console.log(rawStory)
-  while (i < rawStory.length) {
-    if (rawStory[i] === "[") {
-      
-      let inputType;
-      if (rawStory[i+1] === "n") {
-        inputType = "noun";
-      } else if (rawStory[i+1] === "v") {
-        inputType = "verb";
-      } else {
-        inputType = "adjective";
-      }
+  const deleteWord = rawStory.replace(/\b\w+\[/g, '[');
+  const putInputs = deleteWord.replace(/\[n\]/g, "<input placeholder='noun' />").replace(/\[v\]/g, 
+  "<input placeholder='verb' />").replace(/\[a\]/g, 
+  "<input placeholder='adjective' />"
+  );
 
-      console.log(processedHTML)
-      processedHTML = processedHTML.substring(0, processedHTML.lastIndexOf(" "));
-      console.log(processedHTML)
 
-      processedHTML += `<span></span> <input type="text" placeholder="${inputType}">`;
-      console.log(processedHTML)
+  const parser = new DOMParser()
+  const html = parser.parseFromString(putInputs, 'text/html' )  
+  h2.appendChild(html.body)
+  
 
-      i = rawStory.indexOf("]", i) + 2;
-      console.log(i)
-    } else {
-      
-      processedHTML += rawStory[i];
-   
-      i++;
-    }
-  }
-  processedHTML += "</p>";
-  h2.insertAdjacentHTML("beforeend", processedHTML);
-  return processedHTML;
-}
+
 
 /**
  * All your other JavaScript code goes here, inside the function. Don't worry about
@@ -76,6 +54,7 @@ function parseStory(rawStory) {
  *
  * You'll want to use the results of parseStory() to display the story on the page.
  */
+}
 getRawStory()
   .then(parseStory)
   .then((processedStory) => {
