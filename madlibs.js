@@ -1,60 +1,94 @@
-/**
- * Complete the implementation of parseStory.
- *
- * parseStory retrieves the story as a single string from story.txt
- * (I have written this part for you).
- *
- * In your code, you are required (please read this carefully):
- * - to return a list of objects
- * - each object should definitely have a field, `word`
- * - each object should maybe have a field, `pos` (part of speech)
- *
- * So for example, the return value of this for the example story.txt
- * will be an object that looks like so (note the comma! periods should
- * be handled in the same way).
- *
- * Input: "Louis[n] went[v] to the store[n], and it was fun[a]."
- * Output: [
- *  { word: "Louis", pos: "noun" },
- *  { word: "went", pos: "verb", },
- *  { word: "to", },
- *  { word: "the", },
- *  { word: "store", pos: "noun" }
- *  { word: "," }
- *  ....
- *
- * There are multiple ways to do this, but you may want to use regular expressions.
- * Please go through this lesson: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/
- */
-
 function parseStory(rawStory) {
-  const h2 = document.querySelector(".madLibsEdit");
+  const story = document.querySelector(".madLibsEdit");
   const deleteWord = rawStory.replace(/\b\w+\[/g, '[');
-  const putInputs = deleteWord.replace(/\[n\]/g, "<input placeholder='noun' />").replace(/\[v\]/g, 
-  "<input placeholder='verb' />").replace(/\[a\]/g, 
-  "<input placeholder='adjective' />"
+  const putInputs = deleteWord.replace(/\[n\]/g,
+   "<input id='noun'  placeholder='noun' />").replace(/\[v\]/g, 
+  "<input id='verb'   placeholder='verb' />").replace(/\[a\]/g, 
+  "<input id='adjective'  placeholder='adjective' />"
   );
-
 
   const parser = new DOMParser()
   const html = parser.parseFromString(putInputs, 'text/html' )  
-  h2.appendChild(html.body)
+  story.appendChild(html.body)
+ 
+  const duplicateStory = document.querySelector('.madLibsPreview')
+  duplicateStory.innerHTML = rawStory.replace(/\[n\]/g,
+   "<span class='noun'>noun</span>").replace(/\[v\]/g, 
+  "<span class='verb'>verb</span>").replace(/\[a\]/g, 
+  "<span class='adjective'>adjective</span>");
   
-
-
-
-/**
- * All your other JavaScript code goes here, inside the function. Don't worry about
- * the `then` and `async` syntax for now.
- *
- * NOTE: You should not be writing any code in the global namespace EXCEPT
- * declaring functions. All code should either:
- * 1. Be in a function.
- * 2. Be in .then() below.
- *
- * You'll want to use the results of parseStory() to display the story on the page.
- */
+  const inputs = document.querySelectorAll(".madLibsEdit input");
+  inputs.forEach(input => {
+    input.addEventListener('input', () => {
+      const nounValue = document.getElementById('noun').value;
+      const verbValue = document.getElementById('verb').value;
+      const adjectiveValue = document.getElementById('adjective').value;
+      
+      const nounSpan = document.querySelector('.madLibsPreview .noun');
+      const verbSpan = document.querySelector('.madLibsPreview .verb');
+      const adjectiveSpan = document.querySelector('.madLibsPreview .adjective');
+      
+      nounSpan.innerHTML = nounValue;
+      verbSpan.innerHTML = verbValue;
+      adjectiveSpan.innerHTML = adjectiveValue;
+    });
+  });
 }
+
+
+
+
+
+
+// function parseStory(rawStory) {
+//   const story = document.querySelector(".madLibsEdit");
+//   const deleteWord = rawStory.replace(/\b\w+\[/g, '[');
+//   const putInputs = deleteWord.replace(/\[n\]/g,
+//    "<input id='noun'  placeholder='noun' />").replace(/\[v\]/g, 
+//   "<input id='verb'   placeholder='verb' />").replace(/\[a\]/g, 
+//   "<input id='adjective'  placeholder='adjective' />"
+//   );
+
+//   const parser = new DOMParser()
+//   const xml = parser.parseFromString(putInputs, 'text/html')
+//   const html = parser.parseFromString(putInputs, 'text/html' )  
+//   story.appendChild(html.body)
+ 
+//   const duplicateStory = document.querySelector('.madLibsPreview')
+//   duplicateStory.appendChild(xml.body)
+
+//   // Add event listeners to input elements
+//   const inputElements = document.querySelectorAll('input');
+//   inputElements.forEach((input) => {
+//     input.addEventListener('input', replaceInputs);
+//   });
+// }
+
+// function replaceInputs() {
+//   const nounValue = document.getElementById('noun').value;
+//   const verbValue = document.getElementById('verb').value;
+//   const adjectiveValue = document.getElementById('adjective').value;
+
+//   const storyPreview = document.querySelector('.madLibsPreview');
+//   const storyInputs = storyPreview.querySelectorAll('input');
+
+//   storyInputs.forEach((input) => {
+//     const inputId = input.getAttribute('id');
+//     let replacementValue;
+
+//     if (inputId === 'noun') {
+//       replacementValue = nounValue;
+//     } else if (inputId === 'verb') {
+//       replacementValue = verbValue;
+//     } else if (inputId === 'adjective') {
+//       replacementValue = adjectiveValue;
+//     }
+
+//     input.parentNode.replaceChild(document.createTextNode(replacementValue), input);
+//   });
+// }
+
+
 getRawStory()
   .then(parseStory)
   .then((processedStory) => {
