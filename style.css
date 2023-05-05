@@ -1,3 +1,51 @@
-/**
- * Your CSS goes here.
- */
+input{
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    width: 100px;
+    background-color: rgba(44, 87, 156, 0.637);
+}
+
+input::placeholder{
+    font-size: 18px;
+    color: white;
+}
+
+html{
+    background: url("images/camp.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: table;
+    margin: auto;
+}
+
+html, body{
+    height: 100%;
+}
+
+body{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+div{
+    margin: 70px;
+    font-size: 25px;
+    line-height: 2;
+}
+
+.madLibsEdit , .madLibsPreview{
+    background-color: rgba(250, 235, 215, 0.664);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+span{
+    color: rgb(163, 42, 42);
+    background-color: aliceblue;
+    padding: 8px 20px;
+    width: 100px;
+    border-radius: 10px;
+    margin: 5px;
+}

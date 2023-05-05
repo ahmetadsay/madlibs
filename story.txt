@@ -1,3 +1,8 @@
-Louis[n] went[v] to the store[n], and it was fun[a]. He taught[v] the class[n].
-The abbreviation[n] "n" means[v] noun. We use[v] the letter[n] "v" for verbs.
-And for "a", you can[v] make a good[a] guess.
+[n] and [n] wanted to go camping, first they needed a tent. 
+They decided to make a tent out of [n] and [n].
+Next they packed other things they would need for camping like [n] and [n].
+They were ready to go! They started [v] into the woods. They got very [a] when they saw a [n].
+Then they realized it was just a silly [n].
+When they found a campsite they unpacked the [n] and then decided to go [v].
+They used [n] and [n] to build a fire.
+It was very [a]. They sat around the campfire telling [a] stories before bedtime!
