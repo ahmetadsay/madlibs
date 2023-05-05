@@ -22,8 +22,8 @@ function parseStory(rawStory) {
   const inputs = document.querySelectorAll(".madLibsEdit input");
   const spans = document.querySelectorAll(".madLibsPreview span");
 
-  inputs.forEach((input, index) => {
-    const span = spans[index];
+  inputs.forEach((input, i) => {
+    const span = spans[i];
 
     input.addEventListener("input", () => {
       span.textContent = input.value;
@@ -31,8 +31,12 @@ function parseStory(rawStory) {
 
     input.addEventListener("keydown", (event) => {
       if (event.keyCode === 13) {
-        if (index < inputs.length - 1) {
-          inputs[index + 1].focus();
+        if (i < inputs.length - 1) {
+          inputs[i + 1].focus();
+        }
+
+        else if ( i = inputs.length ) {
+          inputs[0].focus()
         }
       }
     });
